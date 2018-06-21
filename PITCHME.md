@@ -55,7 +55,8 @@ const source = new Observable((observer) => {
 
 There is one big problem with cold observables:
 
-If you’re subscribing to an observable more than once that is creating some scarce resource, like a web socket connection.
+
+If you’re subscribing to an observable more than once that is creating some scarce resource, like a web socket connection, you don’t want to create that web socket connection over and over.
 
 ---
 
