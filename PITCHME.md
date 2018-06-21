@@ -1,10 +1,14 @@
 @title[observable]
 
+### Observables.
+
 Observables are **functions** that tie an observer to a producer. That’s it.
 
 ---
 
 @title[producers]
+
+### Producers.
 
 A producer is the source of values for your observable.
 It could be a web socket, it could be DOM events, it could be an iterator, or something looping over an array.
@@ -62,3 +66,31 @@ If you’re subscribing to an observable more than once that is creating some sc
 There are several functions in RxJs that you can use to turn a cold observsable into a hot observable.
 
 The one we have been using is `share` that makes a hot, refCounted observable that can be retried on failure, or repeated on success.
+
+---
+
+@title[how_to_make_it_hot_2]
+
+```
+const votes = http.get('https://voting.com/api/votes');
+
+votes.subscribe((votes) => console.debug('votes', votes));
+votes.subscribe((votes) => refreshDOM(votes));
+
+// Will trigger 2 GET requests
+
+```
+
+---
+
+@title[how_to_make_it_hot_3]
+
+```
+const votes = http.get('https://voting.com/api/votes').share(); // <--- We are sharing o multicasting the source.
+
+votes.subscribe((votes) => console.debug('votes', votes));
+votes.subscribe((votes) => refreshDOM(votes));
+
+// Will trigger 1 GET requests
+
+```
