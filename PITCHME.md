@@ -44,3 +44,21 @@ const source = new Observable((observer) => {
 ```
 
 ---
+
+@title[why_make_it_hot]
+
+### Why make an Observable hot?
+
+There is one big problem with cold observables:
+
+If you’re subscribing to an observable more than once that is creating some scarce resource, like a web socket connection.
+
+---
+
+@title[how_to_make_it_hot]
+
+### How to make an Observable hot?
+
+There are several functions in RxJs that you can use to turn a cold observsable into a hot observable.
+
+The one we have been using is `share` that makes a hot, refCounted observable that can be retried on failure, or repeated on success.
